@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:insert="blocks/head :: head"/>
+<body>
+<head th:insert="blocks/menu :: menu"/>
+
+<div class="controller ustify-content-center">
+    <div class="controller">
+
+    </div>
+    <div class="controller">
+        <div class="row justify-content-md-center">
+            <div class="col col-lg-2">
+                <form method="post" th:action="@{/main}">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="text" name="text" placeholder="Input text" value="">
+                    </div>
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="tag" name="tag" placeholder="Input tag" value="">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+
+            <div class="col col-lg-2">
+                <form method="post" th:action="@{/filter}">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" name="filterText" placeholder="Input text" value="">
+                    </div>
+                    <button type="submit" class="btn btn-warning">Find</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <br>
+    <h1 th:text="${error}"/>
+    <div th:each="ms : ${msg}" class="container">
+        <h5 th:text="'id: '+ ${ms.id} + ', text: ' + ${ms.text} + ', tag: ' + ${ms.tag} + ', ' + ${ms.authorName}"/>
+    </div>
+</div>
+
+
+
+
+<div th:insert="blocks/js :: js"/>
+</body>
+</html>
