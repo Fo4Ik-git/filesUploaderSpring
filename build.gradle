@@ -31,3 +31,9 @@ dependencies {
 /*tasks.named('test') {
 	useJUnitPlatform()
 }*/
+jar {
+	manifest {
+		attributes "Main-Class": "com.fo4ik.webFilesSaver.WebFilesSaverApplication"
+	}
+	//from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+}

@@ -4,14 +4,20 @@ import jakarta.persistence.*;
 
 @Entity
 public class Message {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false)
+    private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     public User author;
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+
     private String text, tag;
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Message(String text, String tag, User author) {
         this.author = author;
