@@ -1,5 +1,6 @@
 package com.fo4ik.webFilesSaver.controllers;
 
+import com.fo4ik.webFilesSaver.config.Config;
 import com.fo4ik.webFilesSaver.model.Logo;
 import com.fo4ik.webFilesSaver.model.Message;
 import com.fo4ik.webFilesSaver.model.User;
@@ -38,17 +39,11 @@ public class MainController {
         Iterable<Message> message = messageRepo.findAll();
         model.addAttribute("title", "Main page");
         model.addAttribute("msg", message);
+        model.addAttribute("user", user);
 
         //model.addAttribute("logo", "https://www.w3schools.com/images/w3schools_green.jpg");
-
-        if (user != null) {
-            User userFromDb = userRepo.findByUsername(user.getUsername());
-            Logo logo = logoRepo.findById(userFromDb.getId());
-            if (!logo.getPath().equals("")) {
-                model.addAttribute("logo", "/files/"+logo.getPath());
-                System.out.println("Logo path " + logo.getPath());
-            }
-        }
+        Config config = new Config(userRepo, logoRepo);
+        config.getUserLogo(user, model);
 
         try {
            /* User userFromDb = userRepo.findByUsername(user.getUsername());
@@ -60,6 +55,8 @@ public class MainController {
         }
         return "main";
     }
+
+
 
     @PostMapping("/main")
     public String addMessage(

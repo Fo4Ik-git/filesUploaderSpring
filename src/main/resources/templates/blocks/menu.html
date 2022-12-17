@@ -68,7 +68,7 @@
                     <a class="nav-link active" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
+                    <a class="nav-link" href="/main">Main</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Pricing</a>
@@ -83,17 +83,21 @@
                 <button class="btn btn-outline-light" type="submit">Search</button>
             </form>
 
-            <div class="nav-item nav-item-dropdown" style="margin-left: 10px ">
+            <div class="nav-item nav-item-dropdown" style="margin-left: 10px " th:if="${user}">
                 <img th:if="${logo}" th:src="${logo}" alt="" class="dropdown-trigger"
                      style="border-radius: 100px;width:48px;height:48px;">
-                <img th:unless="${logo}" src="https://jaylog.co/wp-content/uploads/2017/12/noimg.png" alt="" class="dropdown-trigger" style="border-radius: 100px;width:48px;height:48px;">
+                <img th:unless="${logo}" src="https://jaylog.co/wp-content/uploads/2017/12/noimg.png" alt=""
+                     class="dropdown-trigger" style="border-radius: 100px;width:48px;height:48px;">
                 <ul class="dropdown-menu">
                     <li class="dropdown-menu-item">
                         <a href="#">Dropdown Item 1</a>
                     </li>
-                    <li class="dropdown-menu-item">
-                        <a href="#">Dropdown Item 2</a>
+
+                    <!--method for access to the user's profile by Admin-->
+                    <li class="dropdown-menu-item" th:if="${isAdmin} or ${isModerator}">
+                        <a href="/user">User</a>
                     </li>
+
                     <li class="dropdown-menu-item">
                         <form th:action="@{/logout}" method="post">
                             <button type="submit" class="btn btn-warning">Logout</button>
@@ -101,6 +105,7 @@
                     </li>
                 </ul>
             </div>
+
         </div>
     </div>
 </nav>

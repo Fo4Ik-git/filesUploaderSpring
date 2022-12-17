@@ -7,12 +7,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
-    public static String uploadDirectory= System.getProperty("user.dir");
+    public static String uploadDirectory = System.getProperty("user.dir");
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        System.out.println("UploadDir " + uploadDirectory);
-        registry.addResourceHandler("/files/**").addResourceLocations("file:" + uploadDirectory+"\\");
+        registry.addResourceHandler("/files/**").addResourceLocations("file:" + uploadDirectory + "\\");
     }
 
     public void addViewControllers(ViewControllerRegistry registry) {
