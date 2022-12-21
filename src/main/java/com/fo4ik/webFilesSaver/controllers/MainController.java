@@ -39,7 +39,7 @@ public class MainController {
         Iterable<Message> message = messageRepo.findAll();
         model.addAttribute("title", "Main page");
         model.addAttribute("msg", message);
-        model.addAttribute("user", user);
+
 
         //model.addAttribute("logo", "https://www.w3schools.com/images/w3schools_green.jpg");
         Config config = new Config(userRepo, logoRepo);

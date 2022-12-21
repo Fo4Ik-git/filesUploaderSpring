@@ -45,6 +45,7 @@ public class Config {
                             break;
                     }
                 }
+                model.addAttribute("user", user);
             }
         } catch (Exception e) {
 

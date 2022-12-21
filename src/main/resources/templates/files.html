@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:insert="blocks/head :: head"/>
+<body>
+<head th:insert="blocks/menu :: menu"/>
+
+<style>
+    .settings {
+        width: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        margin-top: 30px;
+        text-align: center;
+    }
+
+    .box__dragndrop,
+    .box__uploading,
+    .box__success,
+    .box__error {
+        display: none;
+    }
+</style>
+
+
+<div class="container settings">
+    <div class="row">
+        <div class="col">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createFolder">
+                Create folder
+            </button>
+        </div>
+        <div class="col">
+            <form th:action="@{/createFile}">
+                <button type="submit" class="btn btn-primary">Create File</button>
+            </form>
+        </div>
+        <div class="col">
+            <form th:action="@{/editName}">
+                <button type="submit" class="btn btn-primary">Edit Name</button>
+            </form>
+        </div>
+        <div class="col">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#uploadFile">
+                Upload File
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<div class="container" style="text-align: center; margin-top: 10px;">
+    <div th:each="file : ${files}" class="container">
+        <div class="row" th:if="${file.isDirectory()}">
+            <div class="col-auto">
+                <h5 th:text="${file.getName()}"/>
+            </div>
+            <div class="col-auto">
+                <div th:insert="blocks/filesDropdown :: deleteFile"></div>
+            </div>
+        </div>
+    </div>
+
+    <div th:each="file : ${files}" class="container">
+        <div class="row" th:if="${!file.isDirectory()}">
+            <div class="col-auto">
+                <h5 th:text="${file.getName()}"/>
+            </div>
+            <div class="col-auto">
+                <div th:insert="blocks/filesDropdown :: deleteFile"></div>
+            </div>
+        </div>
+    </div>
+    <p th:text="${error}"/>
+    <p th:text="${message}">
+        <a href="/files"> <button class="button">Back</button> </a>
+    </p>
+</div>
+
+
+<div th:insert="blocks/filesDropdown :: uploadFile"></div>
+<div th:insert="blocks/filesDropdown :: createFolder"></div>
+
+
+
+
+
+<div th:insert="blocks/js :: js"></div>
+</body>
+</html>

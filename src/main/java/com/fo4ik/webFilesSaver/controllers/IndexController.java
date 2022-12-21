@@ -32,7 +32,6 @@ public class IndexController {
     @GetMapping("/")
     public String index(@AuthenticationPrincipal User user, Model model) {
         if (user != null) {
-            model.addAttribute("user", user);
             model.addAttribute("title", "Index page");
             Config config = new Config(userRepo, logoRepo);
             config.getUserLogo(user, model);
